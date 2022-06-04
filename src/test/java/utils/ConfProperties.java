@@ -1,4 +1,4 @@
-package prop;
+package utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,12 +10,20 @@ public class ConfProperties {
     private static Properties properties;
     static {
         try {
-            fileInputStream = new FileInputStream("/home/mashusik/course/twogis-test/src/test/resources/conf.properties");
+            fileInputStream = new FileInputStream("conf.properties");
+           //fileInputStream = new FileInputStream(System.getenv("DRIVER_PATH"));
+
             try {
                 properties = new Properties();
                 properties.load(fileInputStream);
             } finally {
-                fileInputStream.close();
+                if(fileInputStream != null) {
+                    try {
+                        fileInputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         } catch (IOException e) {
                 e.printStackTrace();

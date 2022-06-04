@@ -32,6 +32,19 @@ public class MainPage {
     @FindBy(xpath = "/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[1]/header/div[3]/div/div[1]/div/div/a/span")
     private WebElement countEat;
 
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div/div[2]/div[3]/div[1]/div/div[2]/div[1]/nav/ul/li[4]")
+    private WebElement exchangeBtn;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div/div[2]/div[3]/div[1]/div/div[2]/div[1]/nav/ul/li[3]")
+    private WebElement transportBtn;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div/div[2]/div[3]/div[1]/div/div[2]/div[1]/nav/ul/li[2]")
+    private WebElement subwayBtn;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div/div[2]/div[3]/div[1]/div/div[2]/div[1]/nav/ul/li[1]")
+    private WebElement estateBtn;
+
+
     public void loginClick() {
         loginBtn.click();
     }
@@ -40,6 +53,20 @@ public class MainPage {
         jamsBtn.click();
     }
 
+    public void exchangeClick(){
+        exchangeBtn.click();
+    }
+
+    public void transportClick(){
+        transportBtn.click();
+    }
+
+    public void subwayClick(){
+        subwayBtn.click();
+    }
+    public void estateClick(){
+        estateBtn.click();
+    }
     public void sideBarClick(){
         sideBar.click();
     }
