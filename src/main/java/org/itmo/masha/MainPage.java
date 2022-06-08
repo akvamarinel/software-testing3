@@ -44,6 +44,8 @@ public class MainPage {
     @FindBy(xpath = "//*[@id=\"root\"]/div/div/div[2]/div[3]/div[1]/div/div[2]/div[1]/nav/ul/li[1]")
     private WebElement estateBtn;
 
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[3]/div[1]/a[1]")
+    private WebElement hueta;
 
     public void loginClick() {
         loginBtn.click();
@@ -79,6 +81,10 @@ public class MainPage {
         eatField.sendKeys(smth);
         eatField.sendKeys(Keys.ENTER);
     }
+    public void click(){
+        hueta.click();
+    }
+
 
     public String getCount(){
        return countEat.getText();

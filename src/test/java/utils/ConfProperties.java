@@ -8,16 +8,17 @@ public class ConfProperties {
 
     private static FileInputStream fileInputStream;
     private static Properties properties;
+
     static {
         try {
             fileInputStream = new FileInputStream("conf.properties");
-           //fileInputStream = new FileInputStream(System.getenv("DRIVER_PATH"));
+            //fileInputStream = new FileInputStream(System.getenv("DRIVER_PATH"));
 
             try {
                 properties = new Properties();
                 properties.load(fileInputStream);
             } finally {
-                if(fileInputStream != null) {
+                if (fileInputStream != null) {
                     try {
                         fileInputStream.close();
                     } catch (IOException e) {
@@ -26,11 +27,11 @@ public class ConfProperties {
                 }
             }
         } catch (IOException e) {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
+        }
     }
 
-    public static String getProperties(String key){
+    public static String getProperties(String key) {
         return properties.getProperty(key);
     }
 }

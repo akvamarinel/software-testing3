@@ -1,4 +1,4 @@
-package mainpage;
+package mainpagetests;
 
 import utils.WebDriverFactory;
 import org.itmo.masha.MainPage;
@@ -21,24 +21,24 @@ public class MainPageTest {
     private JavascriptExecutor executor;
 
     @BeforeEach
-    public void setUp(){
-        System.setProperty("webdriver.chrome.driver", ConfProperties.getProperties(Constants.CHROME));
-        System.setProperty("webdriver.gecko.driver",  ConfProperties.getProperties(Constants.FIREFOX));
+    public void setUp() {
+        System.setProperty(Constants.WEBDRIVER_CHROME, ConfProperties.getProperties(Constants.CHROME));
+        System.setProperty(Constants.WEBDRIVER_FIREFOX, ConfProperties.getProperties(Constants.FIREFOX));
         driverList = new ArrayList<>();
         chromeDriver = WebDriverFactory.getWebDriver("chrome");
         firefoxDriver = WebDriverFactory.getWebDriver("firefox");
         driverList.add(chromeDriver);
         driverList.add(firefoxDriver);
-        for(WebDriver driver : driverList) {
+        for (WebDriver driver : driverList) {
             driver.manage().window().maximize();
             driver.get("http://2gis.ru/");
         }
 
     }
 
-    @AfterEach
-    public void cleanUpEach(){
-        for(WebDriver driver : driverList) {
+  //  @AfterEach
+    public void cleanUpEach() {
+        for (WebDriver driver : driverList) {
             driver.quit();
         }
     }
@@ -94,12 +94,12 @@ public class MainPageTest {
             mainPage.estateClick();
             Thread.sleep(2000);
             String tmp = driver.getCurrentUrl();
-            Assertions.assertEquals(tmp,"https://2gis.ru/spb/realty/sale");
+            Assertions.assertEquals(tmp, "https://2gis.ru/spb/realty/sale");
         }
     }
 
     @Test
-    public void loginTest() throws InterruptedException{
+    public void loginTest() throws InterruptedException {
         for (WebDriver driver : driverList) {
             mainPage = new MainPage(driver);
             mainPage.loginClick();
@@ -110,14 +110,22 @@ public class MainPageTest {
     }
 
     @Test
-    public void eatTest() throws InterruptedException{
+    public void eatTest() throws InterruptedException {
         for (WebDriver driver : driverList) {
             mainPage = new MainPage(driver);
             mainPage.whereToEatClick();
             mainPage.inputEat(" пицца");
             Thread.sleep(2000);
-            int count = Integer.parseInt(mainPage.getCount());
-            Assertions.assertTrue(count > 0);
+            executor = (JavascriptExecutor) driver;
+            WebElement classTest = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[2]/div"));
+            executor.executeScript("arguments[0].scrollTo(0, document.body.scrollHeight);", classTest);
+            Thread.sleep(500);
+
+           // executor.executeScript("window.scrollBy(0,255)","");
+           // WebElement countElem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[3]/div[1]/a[1]"));
+            //countElem.click();
+           // int count = Integer.parseInt(mainPage.getCount());
+           // Assertions.assertTrue(count > 0);
         }
     }
 
