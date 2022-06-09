@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        System.setProperty("webdriver.chrome.driver", "/home/mashusik/course/twogis-test/drivers/chromedriver");
-        System.setProperty("webdriver.gecko.driver", "/home/mashusik/course/twogis-test/drivers/geckodriver");
+        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
+        System.setProperty("webdriver.gecko.driver", "drivers/geckodriver");
         WebDriver driver = new ChromeDriver();
         //WebDriver driver1 = new FirefoxDriver();
         JavascriptExecutor executor = (JavascriptExecutor) driver;

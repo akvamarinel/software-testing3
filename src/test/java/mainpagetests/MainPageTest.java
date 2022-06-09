@@ -36,7 +36,7 @@ public class MainPageTest {
 
     }
 
-  //  @AfterEach
+    @AfterEach
     public void cleanUpEach() {
         for (WebDriver driver : driverList) {
             driver.quit();
@@ -97,37 +97,5 @@ public class MainPageTest {
             Assertions.assertEquals(tmp, "https://2gis.ru/spb/realty/sale");
         }
     }
-
-    @Test
-    public void loginTest() throws InterruptedException {
-        for (WebDriver driver : driverList) {
-            mainPage = new MainPage(driver);
-            mainPage.loginClick();
-            Thread.sleep(2000);
-            //fixme
-
-        }
-    }
-
-    @Test
-    public void eatTest() throws InterruptedException {
-        for (WebDriver driver : driverList) {
-            mainPage = new MainPage(driver);
-            mainPage.whereToEatClick();
-            mainPage.inputEat(" пицца");
-            Thread.sleep(2000);
-            executor = (JavascriptExecutor) driver;
-            WebElement classTest = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[2]/div"));
-            executor.executeScript("arguments[0].scrollTo(0, document.body.scrollHeight);", classTest);
-            Thread.sleep(500);
-
-           // executor.executeScript("window.scrollBy(0,255)","");
-           // WebElement countElem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[3]/div[1]/a[1]"));
-            //countElem.click();
-           // int count = Integer.parseInt(mainPage.getCount());
-           // Assertions.assertTrue(count > 0);
-        }
-    }
-
 
 }
