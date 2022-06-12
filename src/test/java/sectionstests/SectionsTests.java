@@ -1,6 +1,5 @@
 package sectionstests;
 
-import org.itmo.masha.MainPage;
 import org.itmo.masha.SectionsPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +13,6 @@ import utils.ConfProperties;
 import utils.Constants;
 import utils.WebDriverFactory;
 
-import java.nio.file.WatchEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +39,7 @@ public class SectionsTests {
 
     }
 
-    @AfterEach
+ //   @AfterEach
     public void cleanUpEach() {
         for (WebDriver driver : driverList) {
             driver.quit();
@@ -56,55 +54,26 @@ public class SectionsTests {
             sectionsPage.inputEat(" пицца");
             Thread.sleep(2000);
             sectionsPage.scrollContainer();
-            Thread.sleep(500);
             sectionsPage.cancelCookiesClick();
             sectionsPage.clickPageCounter();
             Thread.sleep(1000);
-            WebElement examplePizza = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div[1]/div[2]/div[1]/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[2]/div/div[2]/div"));
-            examplePizza.click();
+            WebElement example = sectionsPage.getContainer().findElement(By.xpath("./div/div[2]/div/div[3]/div"));
+            example.click();
             sectionsPage.clickInfo();
             Thread.sleep(1000);
-
-            WebElement exampleMenu1 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/div[2]/div[1]/div/div[1]/div[2]/div[2]/div/span/span[1]/button"));
-            WebElement exampleMenu2 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/div[2]/div[1]/div/div[1]/div[2]/div[2]/div/span/span[2]/button"));
-            WebElement exampleMenu3 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/div[2]/div[1]/div/div[1]/div[2]/div[2]/div/span/span[3]/button"));
-            List <WebElement> elementsList = new ArrayList<>();
-            elementsList.add(exampleMenu1);
-            elementsList.add(exampleMenu2);
-            elementsList.add(exampleMenu3);
+            List<WebElement> elements = sectionsPage.getPlaceExample().findElements(By.xpath("./div/div/div[2]/div[2]/div[1]/div/div[1]/div[2]/div[2]/div/span/span"));
             int count = 0;
-            for(WebElement element : elementsList) {
-                System.out.println("h");
-                if(element.getText().toLowerCase().contains("пицца")) {
+            for (WebElement element : elements) {
+                System.out.println(element.getText());
+                if (element.getText().toLowerCase().contains("пицца")) {
                     count++;
-
                 }
             }
-
             Assertions.assertTrue(count > 0);
-
-
-
-
-
-
-
-            //executor = (JavascriptExecutor) driver;
-            //WebElement classTest = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div"));
-
-            //classTest.sendKeys(Keys.DOWN);
-            //executor.executeScript("arguments[0].scrollTo(0, arguments[0].scrollHeight);", classTest);
-
-            //WebElement crest = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[3]/footer/div[2]"));
-            //crest.click();
-            // executor.executeScript("window.scrollBy(0,255)","");
-            //WebElement countElem = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[3]/div[1]/a[1]"));
-            //countElem.click();
-            // int count = Integer.parseInt(mainPage.getCount());
-            // Assertions.assertTrue(count > 0);
         }
-
     }
+
+    //todo: fix pharmacy and beauty via findElementS!! fix pageobjects
 
     @Test
     public void pharmacyTest() throws InterruptedException{

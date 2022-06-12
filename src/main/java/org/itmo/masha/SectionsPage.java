@@ -1,9 +1,6 @@
 package org.itmo.masha;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -15,8 +12,12 @@ public class SectionsPage {
         this.driver = driver;
     }
 
+
+
     @FindBy(xpath = "/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div")
     private WebElement container;
+
+
 
     @FindBy(xpath = "/html/body/div[2]/div/div/div[3]/footer/div[2]")
     private WebElement cookieCancelBtn;
@@ -41,6 +42,9 @@ public class SectionsPage {
 
     @FindBy(xpath = "/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/div[1]/div/div/div[1]/div[2]/div/a")
     private WebElement infoElem;
+
+    @FindBy(xpath = "/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div")
+    private WebElement placeExample;
 
 
 
@@ -77,7 +81,16 @@ public class SectionsPage {
     }
 
     public void clickInfo(){
-        infoElem.click();
+        placeExample.findElement(By.xpath("./div/div/div[2]/div[1]/div/div/div[1]/div[2]/div/a")).click();
+        //infoElem.click();
+    }
+
+    public WebElement getContainer(){
+        return container;
+    }
+
+    public WebElement getPlaceExample(){
+        return placeExample;
     }
 
 }
