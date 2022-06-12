@@ -39,7 +39,7 @@ public class SectionsTests {
 
     }
 
- //   @AfterEach
+    @AfterEach
     public void cleanUpEach() {
         for (WebDriver driver : driverList) {
             driver.quit();
@@ -54,14 +54,17 @@ public class SectionsTests {
             sectionsPage.inputEat(" пицца");
             Thread.sleep(2000);
             sectionsPage.scrollContainer();
+            Thread.sleep(2000);
             sectionsPage.cancelCookiesClick();
+            Thread.sleep(1000);
             sectionsPage.clickPageCounter();
             Thread.sleep(1000);
-            WebElement example = sectionsPage.getContainer().findElement(By.xpath("./div/div[2]/div/div[3]/div"));
-            example.click();
+            WebElement examplePizza = sectionsPage.getContainer().findElement(By.xpath("./div/div[2]/div/div[2]/div"));
+            examplePizza.click();
             sectionsPage.clickInfo();
             Thread.sleep(1000);
-            List<WebElement> elements = sectionsPage.getPlaceExample().findElements(By.xpath("./div/div/div[2]/div[2]/div[1]/div/div[1]/div[2]/div[2]/div/span/span"));
+
+            List<WebElement> elements = sectionsPage.getPlaceExample().findElements(By.xpath("./div/div/div[2]/div[2]/div[1]/div/div[1]/div[2]/div[2]/div/span"));
             int count = 0;
             for (WebElement element : elements) {
                 System.out.println(element.getText());
@@ -69,38 +72,33 @@ public class SectionsTests {
                     count++;
                 }
             }
+            Thread.sleep(1000);
             Assertions.assertTrue(count > 0);
         }
     }
 
-    //todo: fix pharmacy and beauty via findElementS!! fix pageobjects
 
     @Test
-    public void pharmacyTest() throws InterruptedException{
-        for (WebDriver driver : driverList){
+    public void pharmacyTest() throws InterruptedException {
+        for (WebDriver driver : driverList) {
             sectionsPage = new SectionsPage(driver);
             sectionsPage.pharmacyBtnClick();
             Thread.sleep(1000);
-            WebElement pharmacyExample = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[2]/div/div[1]/div"));
-
-            Thread.sleep(1000);
-            pharmacyExample.click();
-            Thread.sleep(500);
+            WebElement examplePharmacy = sectionsPage.getContainer().findElement(By.xpath("./div/div[2]/div/div[3]/div"));
+            examplePharmacy.click();
+            Thread.sleep(2000);
             sectionsPage.clickInfo();
             Thread.sleep(1000);
-            WebElement exampleInfo1 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/div[2]/div[1]/div/div[3]/div[2]/div/div/span/span[1]/a"));
-            WebElement exampleInfo2 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/div[2]/div[1]/div/div[3]/div[2]/div/div/span/span[2]/a"));
 
-            List <WebElement> elementsList = new ArrayList<>();
-            elementsList.add(exampleInfo1);
-            elementsList.add(exampleInfo2);
-
+            List<WebElement> elements = sectionsPage.getPlaceExample().findElements(By.xpath("./div/div/div[2]/div[2]/div[1]/div/div[2]/div[2]/div/div"));
             int count = 0;
-            for(WebElement element : elementsList){
+            for(WebElement element : elements){
+                System.out.println(element.getText());
                 if(element.getText().toLowerCase().contains("аптек") || element.getText().toLowerCase().contains("лекарств")){
                     count++;
                 }
             }
+            Thread.sleep(1000);
             Assertions.assertTrue(count > 0);
         }
     }
@@ -112,15 +110,23 @@ public class SectionsTests {
             sectionsPage.beautyBtnClick();
             sectionsPage.inputBeauty(" ноготочки");
             Thread.sleep(2000);
-            WebElement exampleBeauty = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div/div/div[2]/div/div/div/div[2]/div[2]/div[1]/div/div/div/div[2]/div/div[1]/div"));
+            WebElement exampleBeauty = sectionsPage.getContainer().findElement(By.xpath("./div/div[2]/div/div[1]/div"));
             Thread.sleep(1000);
             exampleBeauty.click();
             Thread.sleep(1000);
             sectionsPage.clickInfo();
             Thread.sleep(1000);
-            WebElement exampleInfo1 = driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/div[2]/div[1]/div/div[3]/div[2]/div/div/span/a"));
-            System.out.println(exampleInfo1.getText());
-            Assertions.assertTrue((exampleInfo1.getText().toLowerCase().contains("ногтев") || exampleInfo1.getText().toLowerCase().contains("манкюр")));
+            //*[@id="root"]/div/div/div[1]/div[1]/div[2]/div[2]/div/div/div/div/div[2]/div[2]/div/div[1]/div/div/div/div/div[2]/div[2]/div[1]/div/div[1]/div/div[2]/div/span
+            List<WebElement> elements = sectionsPage.getPlaceExample().findElements(By.xpath("./div/div/div[2]/div[2]/div[1]/div/div[1]/div/div[2]/div/span"));
+            int count = 0;
+            for(WebElement element : elements){
+                System.out.println(element.getText());
+                if(element.getText().toLowerCase().contains("маникюр") || element.getText().toLowerCase().contains("ногт")){
+                    count++;
+                }
+            }
+            Thread.sleep(1000);
+            Assertions.assertTrue(count > 0);
         }
     }
 }
